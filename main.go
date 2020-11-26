@@ -54,14 +54,14 @@ func main() {
 		secondPercent := percent * second
 		pterm.Info.Printf("On %s one bitcoin was worth %s dollars"+
 			"\nOn %s one bitcoin was worth %s dollars."+
-			"\nYou would have made %s dollars. \n", pterm.LightMagenta(answers.FirstDate), pterm.LightMagenta(first), pterm.LightMagenta(answers.SecondDate), pterm.LightMagenta(second), pterm.LightMagenta(secondPercent-a))
+			"\nYou would have made %s dollars. \n", pterm.LightWhite(answers.FirstDate), pterm.LightWhite(first), pterm.LightWhite(answers.SecondDate), pterm.LightWhite(second), pterm.LightWhite(secondPercent-a))
 
 	} else {
 		a, err := strconv.ParseFloat(answers.Amount, 64)
 		check(err)
 		pterm.Info.Printf("On %s one bitcoin was worth %s dollars"+
 			"\nOn %s one bitcoin was worth %s dollars."+
-			"\nYou would have made %s dollars. \n", pterm.LightMagenta(answers.FirstDate), pterm.LightMagenta(first), pterm.LightMagenta(answers.SecondDate), pterm.LightMagenta(second), pterm.LightMagenta((second-first)*a))
+			"\nYou would have made %s dollars. \n", pterm.LightWhite(answers.FirstDate), pterm.LightWhite(first), pterm.LightWhite(answers.SecondDate), pterm.LightWhite(second), pterm.LightWhite((second-first)*a))
 	}
 }
 
