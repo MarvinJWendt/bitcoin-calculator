@@ -47,11 +47,22 @@ func main() {
 	first, _ := GetPrice(answers.FirstDate)
 	_, second := GetPrice(answers.SecondDate)
 
-	a, err := strconv.ParseFloat(answers.Amount, 64)
-	check(err)
-	pterm.Info.Printf("On %s one bitcoin was worth %s dollars"+
-		"\nOn %s one bitcoin was worth %s dollars."+
-		"\nYou would have made %s dollars. \n", pterm.LightMagenta(answers.FirstDate), pterm.LightMagenta(first), pterm.LightMagenta(answers.SecondDate), pterm.LightMagenta(second), pterm.LightMagenta((second-first)*a))
+	if strings.HasSuffix(answers.Amount, "$") {
+		a, err := strconv.ParseFloat(strings.ReplaceAll(answers.Amount, "$", ""), 64)
+		check(err)
+		percent := a / first
+		secondPercent := percent * second
+		pterm.Info.Printf("On %s one bitcoin was worth %s dollars"+
+			"\nOn %s one bitcoin was worth %s dollars."+
+			"\nYou would have made %s dollars. \n", pterm.LightMagenta(answers.FirstDate), pterm.LightMagenta(first), pterm.LightMagenta(answers.SecondDate), pterm.LightMagenta(second), pterm.LightMagenta(secondPercent-a))
+
+	} else {
+		a, err := strconv.ParseFloat(answers.Amount, 64)
+		check(err)
+		pterm.Info.Printf("On %s one bitcoin was worth %s dollars"+
+			"\nOn %s one bitcoin was worth %s dollars."+
+			"\nYou would have made %s dollars. \n", pterm.LightMagenta(answers.FirstDate), pterm.LightMagenta(first), pterm.LightMagenta(answers.SecondDate), pterm.LightMagenta(second), pterm.LightMagenta((second-first)*a))
+	}
 }
 
 func GetPrice(date string) (low, high float64) {
